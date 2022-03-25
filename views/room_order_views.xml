@@ -1,0 +1,108 @@
+<?xml version='1.0' encoding='utf-8'?>
+<odoo>
+  <!-- hotel.room_order tree view -->
+  <record id="hotel_room_order_view_tree" model="ir.ui.view">
+    <field name="name">Room Order</field>
+    <field name="model">hotel.room_order</field>
+    <field name="arch" type="xml">
+      <tree>
+        <!-- Add your fields here -->
+        <field name="name"/>
+        <field name="cust_name"/>
+        <field name="phone_num"/>
+        <field name="price"/>
+        <field name="date_checkin"/>
+        <field name="date_checkout"/>
+        <field name="days_count"/>
+      </tree>
+    </field>
+  </record>
+
+  <!-- hotel.room_order form view -->
+  <record id="hotel_room_order_view_form" model="ir.ui.view">
+    <field name="name">Room Order</field>
+    <field name="model">hotel.room_order</field>
+    <field name="arch" type="xml">
+      <form string="">
+        <sheet>
+          <group name="name" string="Basic Information">
+            <field name="date_order"/>
+            <div class="oe_title">
+              <label for='name' class="oe_edit_only" string="Order ID"/>
+              <h1>
+                <field name="name"/>
+              </h1> 
+            </div>
+            <field name="date_checkin"/>
+            <field name="date_checkout"/>
+          </group>
+
+          <group name="customer" string="Customer Information">
+            <field name="cust_name"/>
+            <field name="phone_num"/>
+            <field name="email"/>
+          </group>
+
+          <group name="room" string="Rooms">
+            <notebook colspan='4'>
+              <page name="room" string="Room">
+                <field name="orderroomdetail_ids">
+                  
+                  <tree editable="bottom">
+                      <field name="room_id"/>
+                      <field name="price_per_unit"/>
+                      <field name="qty"/>
+                      <field name="price" sum='Total'/>
+                  </tree>
+                  
+                </field>
+              </page>
+            </notebook>
+          </group>
+
+          <group name="addons" string="Add-ons">
+            <notebook colspan='4'>
+              <page name="additional" string="Additional">
+                <field name="orderadditionaldetail_ids">
+                  
+                  <tree editable="bottom">
+                      <field name="additional_id"/>
+                      <field name="price_per_unit"/>
+                      <field name="qty"/>
+                      <field name="price" sum='Total'/>
+                  </tree>
+                  
+                </field>
+              </page>
+            </notebook>
+          </group>
+
+          <group name="hotel" string="Hotel Information">
+            <field name="payment"/>
+
+            <label for='price' class="oe_edit_only" string="Total Price"/>
+            <h3>
+              <field name="price" sum='Total'/>
+            </h3>
+          </group>
+        </sheet>
+      </form>
+    </field>
+  </record>
+
+  <!-- hotel.room_order action window -->
+  <record id="hotel_room_order_action" model="ir.actions.act_window">
+    <field name="name">Room Order</field>
+    <field name="type">ir.actions.act_window</field>
+    <field name="res_model">hotel.room_order</field>
+    <field name="view_mode">tree,form</field>
+  </record>
+
+  <!-- This Menu Item must have a parent and an action -->
+  <menuitem 
+    id="hotel_room_order_menu_act" 
+    name="Room Order" 
+    parent="order_menu_categ" 
+    action="hotel_room_order_action" 
+    sequence="10"/>
+</odoo>

@@ -3,8 +3,7 @@
     'name': "hotel_grivia",
 
     'summary': """
-        Short (1 phrase/line) summary of the module's purpose, used as
-        subtitle on modules listing or apps.openerp.com""",
+        Tugas Selasa Pak Wiku""",
 
     'description': """
         Long description of module's purpose
@@ -28,6 +27,12 @@
         'security/ir.model.access.csv',
         'views/views.xml',
         'views/templates.xml',
+        'views/menu.xml',
+        'views/room_views.xml',
+        'views/room_type_views.xml',
+        'views/additional_views.xml',
+        'views/room_order_views.xml',
+
     ],
     # only loaded in demonstration mode
     'demo': [
