@@ -10,12 +10,23 @@
         <field name="name"/>
         <field name="cust_name"/>
         <field name="phone_num"/>
-        <field name="price"/>
+        <field name="total"/>
         <field name="date_checkin"/>
         <field name="date_checkout"/>
         <field name="days_count"/>
       </tree>
     </field>
+  </record>
+
+
+  <record id="sequence_tips" model="ir.sequence">
+    <field name="name">Tips Sequence</field>
+    <field name="code">hotel.room_order.sequence</field>
+    <field name="active">TRUE</field>
+    <field name="prefix">O</field>
+    <field name="padding">5</field>
+    <field name="number_next">1</field>
+    <field name="number_increment">1</field>
   </record>
 
   <!-- hotel.room_order form view -->
@@ -35,6 +46,7 @@
             </div>
             <field name="date_checkin"/>
             <field name="date_checkout"/>
+            <field name="days_count"/>
           </group>
 
           <group name="customer" string="Customer Information">
@@ -80,9 +92,9 @@
           <group name="hotel" string="Hotel Information">
             <field name="payment"/>
 
-            <label for='price' class="oe_edit_only" string="Total Price"/>
+            <label for='total' class="oe_edit_only" string="Total Price"/>
             <h3>
-              <field name="price" sum='Total'/>
+              <field name="total"/>
             </h3>
           </group>
         </sheet>
