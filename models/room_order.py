@@ -1,6 +1,5 @@
 from openerp.exceptions import ValidationError
 from odoo import api, fields, models
-import datetime
 
 
 class RoomOrder(models.Model):
@@ -52,8 +51,19 @@ class RoomOrder(models.Model):
                 from_date = fields.Datetime.to_datetime(record.date_checkin)
                 record.days_count = int(((to_date - from_date)).days)
 
-    payment = fields.Selection(string='Payment Type', selection=[(
-        'credit card', 'Credit Card'), ('online payment', 'Online Payment'), ('cash', 'Cash',), ('debit card', 'Debit Card')])
+    # # payment
+    # payment = fields.Selection(string='Payment Type', selection=[(
+    #     'credit card', 'Credit Card'), ('online payment', 'Online Payment'), ('cash', 'Cash',), ('debit card', 'Debit Card')])
+
+    state = fields.Selection(string='State', selection=[(
+        'pending', 'Pending'), ('completed', 'Completed'), ('cancelled', 'Cancelled'), ('cleaned', 'Cleaned')], default='pending')
+
+    def action_cancel(self):
+        self.state = 'cancelled'
+
+    def action_clean(self):
+        if self.state == 'completed':
+            self.state = 'cleaned'
 
     # customer personal information
     cust_name = fields.Char(string='Customer Name')
@@ -87,13 +97,24 @@ class OrderRoomDetail(models.Model):
         for record in self:
             record.price = record.price_per_unit * record.qty
 
-#     # Decrease room stock
-#     @api.model
-#     def create(self, vals):
-#         record = super(OrderRoomDetail, self).create(vals)
-#         if record.qty:
-#             self.env['hotel.room'].search(
-#                 [('id', '=', record.room_id.id)]).write({'stock': record.room_id.stock - record.qty})
+    # Stock check
+    @api.constrains('qty')
+    def _check_qty(self):
+        for record in self:
+            isNotEnough = self.env['hotel.room'].search(
+                [('stock', '<', record.qty), ('id', '=', record.id)])
+
+            if isNotEnough:
+                raise ValidationError("Not Enough Stock!")
+
+    # Decrease room stock
+    @api.model
+    def create(self, vals):
+        record = super(OrderRoomDetail, self).create(vals)
+        if record.qty:
+            self.env['hotel.room'].search(
+                [('id', '=', record.room_id.id)]).write({'stock': record.room_id.stock - record.qty})
+            return record
 
 
 class OrderAdditionalDetail(models.Model):

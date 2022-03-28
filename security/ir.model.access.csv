@@ -6,3 +6,4 @@ access_hotel_order_room_detail,access.hotel.order_room_detail,model_hotel_order_
 access_hotel_order_additional_detail,access.hotel.order_additional_detail,model_hotel_order_additional_detail,,1,1,1,1
 access_hotel_room_type,access.hotel.room_type,model_hotel_room_type,,1,1,1,1
 access_hotel_room,access.hotel.room,model_hotel_room,,1,1,1,1
+access_hotel_room_payment,access.hotel.room_payment,model_hotel_room_payment,,1,1,1,1

@@ -34,6 +34,7 @@
         'views/room_type_views.xml',
         'views/additional_views.xml',
         'views/room_order_views.xml',
+        'views/room_payment_views.xml',
 
     ],
     # only loaded in demonstration mode
