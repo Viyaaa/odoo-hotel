@@ -34,6 +34,8 @@ class RoomOrder(models.Model):
                 [('orderadditional_id', '=', record.id)]).mapped('price'))
             record.total = (a+b) * record.days_count
 
+    is_pay = fields.Boolean(string='Is Pay')
+
     date_order = fields.Datetime('Order Date', default=fields.Datetime.now())
     date_checkin = fields.Date(
         string='Check In', required=True, default=fields.Datetime.now)

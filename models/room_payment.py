@@ -32,13 +32,13 @@ class RoomPayment(models.Model):
         record = super(RoomPayment, self).create(vals)
         if record.payment:
             self.env['hotel.room_order'].search(
-                [('id', '=', record.room_id.id)]).write({'state': 'completed'})
+                [('id', '=', record.room_id.id)]).write({'state': 'completed', 'is_pay': True})
             return record
 
     # override method
     def unlink(self):
         for i in self:
             self.env['hotel.room_order'].search(
-                [('id', '=', i.room_id.id)]).write({'state': 'pending'})
+                [('id', '=', i.room_id.id)]).write({'state': 'pending', 'is_pay': False})
         # Return boolean
         record = super(RoomPayment, self).unlink()

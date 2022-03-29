@@ -13,7 +13,7 @@
         <field name="total"/>
         <field name="date_checkin"/>
         <field name="date_checkout"/>
-        <field name="days_count"/>
+        <field name="is_pay"/>
       </tree>
     </field>
   </record>
@@ -37,7 +37,7 @@
       <form string="">
         <header>
           <button string="Cancel" name="action_cancel" type="object" class="oe_highlight"
-          attrs="{'invisible': ['|', ('state', '=', 'completed'), ('state', '=', 'cleaned')]}"/>
+          attrs="{'invisible': ['|', ('state', '=', 'completed'), ('state', '=', 'cleaned'), ('state', '=', 'cancelled')]}"/>
           
           <button string="Clean" name="action_clean" type="object" class="oe_highlight" 
           attrs="{'invisible': ['|', ('state', '=', 'pending'), ('state', '=', 'cancelled')]}"/>

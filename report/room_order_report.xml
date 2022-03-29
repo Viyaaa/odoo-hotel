@@ -32,13 +32,14 @@
                 <div class="col-6"><h5>Customer Email: </h5></div>
                 <div class="col-6"><h5 t-field="o.email" /></div>
               </div>
-              <div class="row">
+              <div class="row mt-5">
                 <div class="col-6"><h5>Check-In Date:</h5></div>
-                <h5 t-field="o.date_checkin" class="col-6"/>
+                <div class="col-6"><h5>Check-Out Date:</h5></div>
+                
               </div>
               <div class="row">
-                <div class="col-6"><h5>Check-Out Date:</h5></div>
-                <h5 t-field="o.date_checkout" class="col-6"/>
+                <div class="col-6"><h5 t-field="o.date_checkin"/></div>
+                <div class="col-6"><h5 t-field="o.date_checkout"/></div>
               </div>
             </section>
 
@@ -97,7 +98,7 @@
             <!-- Price -->
             <section>
                 <div class="row">
-                  <h5>Total Price:</h5>
+                  <h5>Total Price: IDR </h5>
                   <h5 t-field="o.total" />
                 </div>
                 <!-- <div class="row">
