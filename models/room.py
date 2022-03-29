@@ -14,6 +14,8 @@ class Room(models.Model):
     price = fields.Integer(string='Price', readonly=True,
                            compute='_compute_price')
 
+    image = fields.Binar(string='Image', attachment=True)
+
     @api.depends('type')
     def _compute_price(self):
         for record in self:
