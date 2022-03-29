@@ -40,6 +40,7 @@
         <field name="date_checkin"/>
         <field name="date_checkout"/>
         <field name="is_pay"/>
+        <field name="is_clean"/>
       </tree>
     </field>
   </record>

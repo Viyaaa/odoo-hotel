@@ -35,6 +35,7 @@ class RoomOrder(models.Model):
             record.total = (a+b) * record.days_count
 
     is_pay = fields.Boolean(string='Is Pay')
+    is_clean = fields.Boolean(string='Is Clean', readonly=True, default=False)
 
     date_order = fields.Datetime('Order Date', default=fields.Datetime.now())
     date_checkin = fields.Date(
@@ -53,10 +54,6 @@ class RoomOrder(models.Model):
                 from_date = fields.Datetime.to_datetime(record.date_checkin)
                 record.days_count = int(((to_date - from_date)).days)
 
-    # # payment
-    # payment = fields.Selection(string='Payment Type', selection=[(
-    #     'credit card', 'Credit Card'), ('online payment', 'Online Payment'), ('cash', 'Cash',), ('debit card', 'Debit Card')])
-
     state = fields.Selection(string='State', selection=[(
         'pending', 'Pending'), ('completed', 'Completed'), ('cancelled', 'Cancelled'), ('cleaned', 'Cleaned')], default='pending')
 
@@ -66,6 +63,7 @@ class RoomOrder(models.Model):
     def action_clean(self):
         if self.state == 'completed':
             self.state = 'cleaned'
+            self.is_clean = True
 
     # customer personal information
     cust_name = fields.Char(string='Customer Name')
